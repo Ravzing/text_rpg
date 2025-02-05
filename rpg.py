@@ -7,3 +7,8 @@
     character will have their own stats and abilities.
     also username and password to save the game.
 """
+
+from account_storage import AccountRegistry
+
+if __name__=="__main__":
+    AccountRegistry().menu()
