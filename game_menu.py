@@ -1,8 +1,10 @@
 class Menu:
     def __init__(self, account_registry):
        self.account_registry = account_registry 
+       self.current_character = None
        
-    def open_game_menu(self):
+    def open_game_menu(self, character):
+        self.current_character = character
         while True:
             print("\nGame Menu:")
             print("1. Character")
@@ -22,8 +24,18 @@ class Menu:
                 print("Invalid choice! Please enter a valid option.")
 
     def character(self):
-        self.woodcutting = []
-        print("\nCharacter menu: View and manage your character.")
+        if self.current_character:
+            print("\n🎭 Character Info 🎭")
+            print(f"Name: {self.current_character.name}")
+            print(f"Health: {self.current_character.health}")
+            print(f"Armor: {self.current_character.armor}")
+            print(f"Attack: {self.current_character.attack}")
+            print(f"Woodcutting Level: {self.current_character.woodcutting}")
+            print(f"Fishing Level: {self.current_character.fishing}")
+            print(f"Mining Level: {self.current_character.mining}")
+            print(f"Smithing Level: {self.current_character.smithing}")
+        else:
+            print("No character data available.")
 
     def map_menu(self):
         while True:

@@ -1,8 +1,10 @@
 import csv
 import re
 import sys
+import os
 
 from game_menu import Menu
+from characters_info import Character
 
 storage = "account.csv"
 
@@ -30,8 +32,11 @@ class AccountRegistry:
                 pass
         
     def save_account(self, username, password, character_name):
+        file_exists = os.path.exists(self.storage)
         with open(self.storage, mode='a', newline='') as file: 
             writer = csv.writer(file)
+            if not file_exists:
+                writer.writerow(["username", "password", "character_name"])
             writer.writerow([username, password, character_name])
           
     def register(self):
@@ -43,6 +48,8 @@ class AccountRegistry:
         self.characters_name.append(new_character_name)
         self.save_account(new_username,new_password,new_character_name)
         print("Account created successfully!")
+        new_character = Character(new_character_name)
+        new_character.save_to_csv()
         
     def is_valid_input(self, validation):
         pattern = r'^[a-zA-Z0-9_]+$'
@@ -78,8 +85,11 @@ class AccountRegistry:
             index = self.username.index(username)
             if self.password[index] == password:
                 print("Login successful!")
-                self.game_menu.open_game_menu()
-                return
+                character_name = self.characters_name[index] 
+                player_character = Character.load_character(character_name)
+                if player_character:
+                    self.game_menu.open_game_menu(player_character)
+                return 
         print("Invalid username or password.")
             
     def menu(self):
