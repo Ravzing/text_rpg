@@ -8,7 +8,12 @@ character will have their own stats and abilities.
 also username and password to save the game.
 """
 
+from game_menu import Menu, Combat
 from account_storage import AccountRegistry
 
+
 if __name__ == "__main__":
-    AccountRegistry().menu()
+    account_registry = AccountRegistry()
+    menu = Menu(account_registry)
+    account_registry.game_menu = menu
+    menu.menu()

@@ -3,7 +3,6 @@ import re
 import sys
 import os
 
-from game_menu import Menu
 from characters_info import Character
 
 STORAGE = "account.csv"
@@ -17,7 +16,7 @@ class AccountRegistry:
         self.password = []
         self.storage = STORAGE
         self.load_accounts()
-        self.game_menu = Menu(self)
+        self.game_menu = None
 
     def _write_csv_header(self, writer) -> None:
         writer.writerow(["username", "password", "character_name"])
@@ -131,19 +130,3 @@ class AccountRegistry:
                 self.game_menu.open_game_menu(player_character)
         else:
             print("Invalid username or password.")
-
-    def menu(self) -> None:
-        while True:
-            print("1. Register")
-            print("2. Login")
-            print("3. Exit")
-            choice = input("Enter your choice: ")
-            if choice == "1":
-                self.register()
-            elif choice == "2":
-                self.login()
-            elif choice == "3":
-                print("Thanks for playing till next time!")
-                sys.exit()
-            else:
-                print("Invalid choice!")
