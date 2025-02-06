@@ -77,7 +77,6 @@ class AccountRegistry:
             else:
                 print("Invalid input. Please avoid spaces, commas, and special characters.")
         
-        
     def login(self):
         username = input("Enter your username: ")
         password = input("Enter your password: ")

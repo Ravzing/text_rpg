@@ -61,6 +61,7 @@ class Character:
 
         with open(characters_list, mode='w', newline='') as file:
             writer = csv.writer(file)
+            writer.writerow(["name", "health", "armor", "attack", "woodcutting", "fishing", "mining", "smithing"])
             for char in characters:
                 if char["name"] == self.name:
                     writer.writerow([self.name, self.health, self.armor, self.attack,
@@ -74,25 +75,12 @@ class Character:
             print(f"Character '{self.name}' updated successfully!")
         else:
             print(f"Character '{self.name}' not found. No update performed.")
-                
-         
-    def get_health(self):
-        return self.health
-
-    def get_armor(self):
-        return self.armor
-               
-    def defense(self, enemy):
-        damage =max(0, enemy.attack - self.armor)
-        self.health -= damage
-        
-        if self.health <= 0:
-            self.health = 0
-            return "You died"
-        return f"Damage {damage} took, remaining health: {self.health}"
-    
-    def dmg(self, enemy):
+                   
+    def attack_enemy(self, enemy):
         damage =max(0, self.attack - enemy.armor)
-        return enemy.take_damage(damage)
+        enemy.health -= damage
+        if enemy.health <= 0:
+            enemy.health = 0
+        return f"{self.name} dealt {damage} damage, remaining health: {enemy.health}"
         
         
