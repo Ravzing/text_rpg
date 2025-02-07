@@ -17,6 +17,7 @@ class Enemy:
         player.health -= damage
         if player.health <= 0:
             player.health = 0
+        return f"{self.name} dealt {damage} damage, remaining health: {player.health} for {player.name}"
 
     @classmethod
     def load_enemies_from_csv(cls):

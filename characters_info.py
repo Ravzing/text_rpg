@@ -132,4 +132,4 @@ class Character:
         enemy.health -= damage
         if enemy.health <= 0:
             enemy.health = 0
-        return f"{self.name} dealt {damage} damage, remaining health: {enemy.health}"
+        return f"{self.name} dealt {damage} damage, remaining health: {enemy.health} for {enemy.name}"
