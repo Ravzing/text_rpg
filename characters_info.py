@@ -4,6 +4,10 @@ import os
 CHARACTERS_LIST = "characters.csv"
 
 
+class Items:
+    pass
+
+
 class Inventory:
     pass
 
@@ -16,7 +20,9 @@ class Character:
     def __init__(self, name: str):
         self.name: str = name
         self.health: int = 100
-        self.armor: int = 10
+        self.armor: int = 5
+        # self.health_max: int =
+        # self.health_remaining: int =
         self.attack: int = 5
         self.woodcutting: int = 1
         self.fishing: int = 1
@@ -127,9 +133,3 @@ class Character:
         else:
             print(f"Character '{self.name}' not found. No update performed.")
 
-    def attack_enemy(self, enemy) -> str:
-        damage = max(0, self.attack - enemy.armor)
-        enemy.health -= damage
-        if enemy.health <= 0:
-            enemy.health = 0
-        return f"{self.name} dealt {damage} damage, remaining health: {enemy.health} for {enemy.name}"

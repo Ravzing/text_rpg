@@ -12,13 +12,6 @@ class Enemy:
         self.attack = int(attack)
         self.storage = enemy_storage
 
-    def attack_enemy(self, player):
-        damage = max(0, self.attack - player.armor)
-        player.health -= damage
-        if player.health <= 0:
-            player.health = 0
-        return f"{self.name} dealt {damage} damage, remaining health: {player.health} for {player.name}"
-
     @classmethod
     def load_enemies_from_csv(cls):
         enemies = []
